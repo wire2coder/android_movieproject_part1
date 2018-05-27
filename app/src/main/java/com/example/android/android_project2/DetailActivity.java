@@ -19,11 +19,16 @@ public class DetailActivity extends AppCompatActivity {
 
     // using 'Butter Knife' library
     // http://jakewharton.github.io/butterknife/
-    @BindView(R.id.tv_title) TextView tv_title;
-    @BindView(R.id.tv_release_date) TextView tv_release_date;
-    @BindView(R.id.tv_overview) TextView tv_overview;
-    @BindView(R.id.tv_vote_average) TextView tv_vote_average;
-    @BindView(R.id.iv_poster) ImageView iv_poster;
+    @BindView(R.id.tv_title)
+    TextView tv_title;
+    @BindView(R.id.tv_release_date)
+    TextView tv_release_date;
+    @BindView(R.id.tv_overview)
+    TextView tv_overview;
+    @BindView(R.id.tv_vote_average)
+    TextView tv_vote_average;
+    @BindView(R.id.iv_poster)
+    ImageView iv_poster;
 
 
     /* BEFORE create */
