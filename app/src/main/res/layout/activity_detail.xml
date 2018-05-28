@@ -83,13 +83,21 @@
         style="@style/Base.TextAppearance.AppCompat.Large"
         />
 
-    <TextView
-        tools:text="Summary"
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:paddingLeft="@dimen/padding_left"
-        android:id="@+id/tv_overview"
-        android:textSize="@dimen/normal_text"
-        />
+        android:layout_height="wrap_content">
+
+        <TextView
+            tools:text="Summary"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingLeft="@dimen/padding_left"
+            android:id="@+id/tv_overview"
+            android:textSize="@dimen/normal_text"
+            />
+
+    </ScrollView>
+
+
 
 </LinearLayout>

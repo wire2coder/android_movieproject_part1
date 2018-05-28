@@ -11,7 +11,7 @@ public class LogUtil {
     private static String TAG = LogUtil.class.getSimpleName();
 
     public static void logStuff(String string1) {
-        Log.v(TAG, string1);
+        Log.v("ttt >>> " + TAG, string1);
     }
 
 } // class
