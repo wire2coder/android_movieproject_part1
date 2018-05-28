@@ -4,14 +4,11 @@
 
 package com.example.android.android_project2;
 
-import android.content.ContentResolver;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.net.ConnectivityManager;
-import android.net.Network;
 import android.net.NetworkInfo;
-import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
@@ -21,16 +18,12 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.GridView;
-import android.widget.TextView;
 import android.widget.Toast;
 
-import java.net.NetworkInterface;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 
-import butterknife.BindView;
-import butterknife.ButterKnife;
 
 
 public class MainActivity extends AppCompatActivity {
@@ -103,7 +96,13 @@ public class MainActivity extends AppCompatActivity {
             URL url = NetworkUtil.makeUrl(BASE_URL_POPULAR);
 
             /* run the AsyncTask to get movies from the server */
-            runNetworkTask(url);
+
+            /* https://stackoverflow.com/questions/3921816/can-i-pass-different-types-of-parameters-to-an-asynctask-in-android */
+
+            // TODO: 5/28 successfully use the AsyncTask from the new file, keep correcting the stuff from code review
+            NetworkTask networkTask = new NetworkTask();
+            networkTask.execute(url, mMovies, mMovieAdapter);
+
         }
 
 
@@ -112,8 +111,6 @@ public class MainActivity extends AppCompatActivity {
     /* helper: for running AsyncTask */
     private void runNetworkTask(URL url) {
 
-         NetworkTask networkTask = new NetworkTask();
-         networkTask.execute(url);
     }
 
     /* helper: checking for internet connection

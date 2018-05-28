@@ -8,7 +8,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 /* AsyncTask class for making internet request */
-public class NetworkTask extends AsyncTask<URL, Void, String> {
+public class NetworkTask extends AsyncTask<Object, Void, String> {
 
     /* class and member variables */
     private String results = null;
@@ -19,9 +19,11 @@ public class NetworkTask extends AsyncTask<URL, Void, String> {
 
 
     @Override
-    protected String doInBackground(URL... params) {
+    protected String doInBackground(Object... params) {
 
-        URL url1 = params[0];
+        URL url1 = (URL) params[0];
+        mMovies = (List<Movie>) params[1];
+        mMovieAdapter = (MovieAdapter) params[2];
 
         results = NetworkUtil.goToWebsite(url1);
 
