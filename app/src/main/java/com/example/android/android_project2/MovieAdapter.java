@@ -10,6 +10,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.squareup.picasso.Picasso;
@@ -33,21 +34,21 @@ public class MovieAdapter extends BaseAdapter {
     /* Constructor */
     public MovieAdapter(Context context, List<Movie> movies) {
 
-//        LogUtil.logStuff( "number of movies: " + String.valueOf(movies.size()) );
-
         this.mContext = context;
         this.mMovies = movies;
     }
-
 
     // you return the number of cells to render here
     @Override
     public int getCount() {
 
-        int size = this.mMovies.size();
-//        LogUtil.logStuff( "getCount() : " + String.valueOf(size) );
-
-        return size; // >> 20
+        if ( mMovies.size() != 0 ) {
+            int size = this.mMovies.size();
+//            LogUtil.logStuff( "getCount() : " + String.valueOf(size) );
+            return size; // >> 20
+        } else {
+            return 0;
+        }
     }
 
     // You don’t need to return an id for this tutorial, so just return 0.
@@ -94,24 +95,20 @@ public class MovieAdapter extends BaseAdapter {
                 .load(movie.getPoster_path())
                 .into(iv_poster);
 
-
         return convertView;
     }
 
-
-    /* helper: Sunshine 04.03, something about replacing old data
-        with new data fetched from servers
-        this is for the coder review
+    /* helper: Sunshine 04.03, something about replacing old
+        data with new data fetched from servers
     */
-    public void setmMovies(List<Movie> movies) {
-
+    public void setMovies(List<Movie> movies) {
         if ( movies != null ) {
-            mMovies = movies;
-            notifyDataSetChanged();
-        } else {
-            Toast.makeText(mContext, "sfdsdfsdfsdfsdfsdfsdfsd", Toast.LENGTH_SHORT).show();
-        }
+            mMovies.clear();
+            mMovies.addAll(movies);
 
+//            mMovies = movies; << this will give onClickListener ERROR!
+            notifyDataSetChanged();
+        }
     }
 
 } // class

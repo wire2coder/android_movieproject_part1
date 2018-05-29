@@ -13,11 +13,12 @@ public class NetworkTask extends AsyncTask<URL, Void, String> {
 
     /* class and member variables */
     private String results = null;
-//    private MovieAdapter mMovieAdapter = new MovieAdapter();
     private MovieAdapter mMovieAdapter;
 
     /* Constructor */
-    public NetworkTask() {
+    public NetworkTask(MovieAdapter movieAdapter) {
+        /* get MovieAdapter from the 'calling' activity */
+        mMovieAdapter = movieAdapter;
     }
 
     @Override
@@ -30,7 +31,6 @@ public class NetworkTask extends AsyncTask<URL, Void, String> {
 
         /* go get data from server */
         results = NetworkUtil.goToWebsite(url1); // >> Strings[]
-//        LogUtil.logStuff(results.toString());
 
         /* this results go to onPostExecute() */
         return results;
@@ -40,17 +40,13 @@ public class NetworkTask extends AsyncTask<URL, Void, String> {
     protected void onPostExecute(String results) {
 
         List<Movie> movies1 = StringUtil.stringToJson(results);
+        mMovieAdapter.setMovies(movies1);
 
-//        if (mMovies.size() != 0) {
-//            mMovies.clear();
-//        }
+        /* SOURCE: http://androidadapternotifiydatasetchanged.blogspot.com/
+        * .notifyDataSetChanged() only works IF YOU 'CRUD' YOUR DATA FIRST
+        * */
 
-//        mMovies.addAll(movies1);
-        mMovieAdapter.setmMovies(movies1);
-
-        /* SOURCE: http://androidadapternotifiydatasetchanged.blogspot.com/ */
 //        mMovieAdapter.notifyDataSetChanged();
-
     }
 
 } // class NetworkTask

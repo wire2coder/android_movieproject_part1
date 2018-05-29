@@ -18,6 +18,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.GridView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import java.net.URL;
@@ -45,7 +46,7 @@ public class MainActivity extends AppCompatActivity {
         /* check if the device is connected to the internet */
         if ( !isThereInternet(MainActivity.this) ) { // >> no internet
 
-            /* show 'no internet' dialogbox and  */
+            /* show 'no internet' dialogbox */
             internetDialog(MainActivity.this).show();
 
         } else { // >> yes internet
@@ -98,19 +99,13 @@ public class MainActivity extends AppCompatActivity {
             /* run the AsyncTask to get movies from the server */
             /* https://stackoverflow.com/questions/3921816/can-i-pass-different-types-of-parameters-to-an-asynctask-in-android */
 
-            NetworkTask networkTask = new NetworkTask();
-//            networkTask.execute(url, mMovies, mMovieAdapter);
+            NetworkTask networkTask = new NetworkTask(mMovieAdapter);
             networkTask.execute(url);
 
         }
 
 
     } // onCreate
-
-    /* helper: for running AsyncTask */
-    private void runNetworkTask(URL url) {
-
-    }
 
     /* helper: checking for internet connection
        https://stackoverflow.com/questions/4238921/detect-whether-there-is-an-internet-connection-available-on-android
@@ -171,24 +166,15 @@ public class MainActivity extends AppCompatActivity {
 
             case R.id.mi_most_popular:
 
-                // TODO: take out the Toast
-                Toast.makeText(MainActivity.this, "mi_most_popular", Toast.LENGTH_SHORT).show();
-
                 URL url_most_popular = NetworkUtil.makeUrl(BASE_URL_POPULAR);
-
-//                new NetworkTask().execute(url_most_popular, mMovies, mMovieAdapter);
-                new NetworkTask().execute(url_most_popular);
+                new NetworkTask(mMovieAdapter).execute(url_most_popular);
 
                 return true; // clickEvent data is 'consumed'
 
             case R.id.mi_highest_rate:
 
-                // TODO: take out the Toast
-                Toast.makeText(MainActivity.this, "mi_top_rated", Toast.LENGTH_SHORT).show();
-
                 URL url_toprated = NetworkUtil.makeUrl(BASE_URL_POPULAR_HIGHEST_RATE);
-
-                new NetworkTask().execute(url_toprated);
+                new NetworkTask(mMovieAdapter).execute(url_toprated);
 
                 return true; // clickEvent data is 'consumed'
 
@@ -197,6 +183,5 @@ public class MainActivity extends AppCompatActivity {
         }
 
     }
-
 
 } // class MainActivity
