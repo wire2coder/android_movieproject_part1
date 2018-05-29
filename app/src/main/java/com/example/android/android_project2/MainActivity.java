@@ -96,12 +96,11 @@ public class MainActivity extends AppCompatActivity {
             URL url = NetworkUtil.makeUrl(BASE_URL_POPULAR);
 
             /* run the AsyncTask to get movies from the server */
-
             /* https://stackoverflow.com/questions/3921816/can-i-pass-different-types-of-parameters-to-an-asynctask-in-android */
 
-            // TODO: 5/28 successfully use the AsyncTask from the new file, keep correcting the stuff from code review
             NetworkTask networkTask = new NetworkTask();
-            networkTask.execute(url, mMovies, mMovieAdapter);
+//            networkTask.execute(url, mMovies, mMovieAdapter);
+            networkTask.execute(url);
 
         }
 
@@ -172,21 +171,24 @@ public class MainActivity extends AppCompatActivity {
 
             case R.id.mi_most_popular:
 
+                // TODO: take out the Toast
                 Toast.makeText(MainActivity.this, "mi_most_popular", Toast.LENGTH_SHORT).show();
 
                 URL url_most_popular = NetworkUtil.makeUrl(BASE_URL_POPULAR);
-                NetworkTask task = new NetworkTask();
-                task.execute(url_most_popular);
+
+//                new NetworkTask().execute(url_most_popular, mMovies, mMovieAdapter);
+                new NetworkTask().execute(url_most_popular);
 
                 return true; // clickEvent data is 'consumed'
 
             case R.id.mi_highest_rate:
 
+                // TODO: take out the Toast
                 Toast.makeText(MainActivity.this, "mi_top_rated", Toast.LENGTH_SHORT).show();
 
                 URL url_toprated = NetworkUtil.makeUrl(BASE_URL_POPULAR_HIGHEST_RATE);
-                NetworkTask task2 = new NetworkTask();
-                task2.execute(url_toprated);
+
+                new NetworkTask().execute(url_toprated);
 
                 return true; // clickEvent data is 'consumed'
 
@@ -195,9 +197,6 @@ public class MainActivity extends AppCompatActivity {
         }
 
     }
-
-
-
 
 
 } // class MainActivity

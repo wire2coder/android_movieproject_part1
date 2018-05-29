@@ -14,4 +14,8 @@ public class LogUtil {
         Log.v("ttt >>> " + TAG, string1);
     }
 
+    public static void sayNull() {
+        Log.v(TAG, "THE THING IS NULL");
+    }
+
 } // class

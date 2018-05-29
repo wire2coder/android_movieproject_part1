@@ -13,6 +13,7 @@ import android.widget.ImageView;
 
 import com.squareup.picasso.Picasso;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class MovieAdapter extends BaseAdapter {
@@ -21,8 +22,12 @@ public class MovieAdapter extends BaseAdapter {
 
     /* declaring member variables */
     private Context mContext;
-    private List<Movie> movies;
+    private List<Movie> mMovies = new ArrayList<>();
 
+
+    /* Constructor */
+    public MovieAdapter() {
+    }
 
     /* Constructor */
     public MovieAdapter(Context context, List<Movie> movies) {
@@ -30,7 +35,7 @@ public class MovieAdapter extends BaseAdapter {
 //        LogUtil.logStuff( "number of movies: " + String.valueOf(movies.size()) );
 
         this.mContext = context;
-        this.movies = movies;
+        this.mMovies = movies;
     }
 
 
@@ -38,7 +43,7 @@ public class MovieAdapter extends BaseAdapter {
     @Override
     public int getCount() {
 
-        int size = this.movies.size();
+        int size = this.mMovies.size();
 //        LogUtil.logStuff( "getCount() : " + String.valueOf(size) );
 
         return size; // >> 20
@@ -70,7 +75,7 @@ public class MovieAdapter extends BaseAdapter {
 //        TextView dummyTextView = new TextView(mContext);
 //        dummyTextView.setText( String.valueOf(position) );
 
-        Movie movie = movies.get(position);
+        Movie movie = mMovies.get(position);
 
         /* GridView optimizes memory usage by recycling the cells. This means that
             if convertView is null, you instantiate a new cell view by using a
@@ -92,5 +97,14 @@ public class MovieAdapter extends BaseAdapter {
         return convertView;
     }
 
+
+    /* helper: Sunshine 04.03, something about replacing old data
+        with new data fetched from servers
+        this is for the coder review
+    */
+    public void setmMovies(List<Movie> movies) {
+        mMovies = movies;
+        notifyDataSetChanged();
+    }
 
 } // class
