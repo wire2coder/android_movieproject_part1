@@ -10,6 +10,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.ImageView;
+import android.widget.Toast;
 
 import com.squareup.picasso.Picasso;
 
@@ -103,8 +104,14 @@ public class MovieAdapter extends BaseAdapter {
         this is for the coder review
     */
     public void setmMovies(List<Movie> movies) {
-        mMovies = movies;
-        notifyDataSetChanged();
+
+        if ( movies != null ) {
+            mMovies = movies;
+            notifyDataSetChanged();
+        } else {
+            Toast.makeText(mContext, "sfdsdfsdfsdfsdfsdfsdfsd", Toast.LENGTH_SHORT).show();
+        }
+
     }
 
 } // class
